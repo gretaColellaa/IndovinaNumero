@@ -37,7 +37,16 @@ class View(object):
         row3 = ft.Row([self._btnReset, self._txtIn, self._btnPlay],
                       alignment=ft.MainAxisAlignment.CENTER)
 
-        self._page.add(row1, row2, row3, self._lv)
+        self._sl = ft.Slider(label="Difficoltà",
+                             min=50, max=500,
+                             value=100, width=600, divisions=10)
+        self._sl.on_change = self._controller.setDifficulty
+
+        self._pb = ft.ProgressBar(width=600, color="amber")
+
+
+
+        self._page.add(row1, row2, self._sl, row3, self._pb, self._lv)
 
         self._page.update()
 

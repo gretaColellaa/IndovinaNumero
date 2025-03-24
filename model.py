@@ -42,9 +42,17 @@ class Model(object):
     def NMax(self):
         return self._NMax
 
+    @NMax.setter
+    def NMax(self, value):
+        self._NMax = value
+
     @property
     def TMax(self):
         return self._TMax
+
+    @NMax.setter
+    def TMax(self, value):
+        self._TMax = value
 
     @property
     def T(self):

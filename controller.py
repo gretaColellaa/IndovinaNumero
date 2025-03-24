@@ -1,3 +1,5 @@
+from math import log2
+
 from view import View
 from model import Model
 import flet as ft
@@ -16,12 +18,15 @@ class Controller(object):
         self._view._txtIn.disabled = False
         self._view._lv.controls.append(
             ft.Text("Indovina a quale numero sto pensando!"))
+
+        self._view._pb.value = self._model.T / self._model.TMax
+        self._view._txtOutNMax.value = self._model.NMax
+
         self._view.update()
 
     def play(self, e):
         tentativoStr = self._view._txtIn.value
         self._view._txtIn.value = ""
-        self._view._txtOutT.value = self._model.T - 1
 
         if tentativoStr == "":
             self._view._lv.controls.append(
@@ -37,7 +42,20 @@ class Controller(object):
                 ft.Text("Attenzione, valore inserito non è un intero.",
                         color="red")
             )
+            self._view.update()
             return
+
+        if tentativoInt < 0 or tentativoInt > self._model.NMax:
+            self._view._lv.controls.append(
+                ft.Text("Attenzione, valore inserito non è compreso tra 0 e "
+                        f"{self._model.NMax}.",
+                        color="red")
+            )
+            self._view.update()
+            return
+
+        self._view._txtOutT.value = self._model.T - 1
+        self._view._pb.value = (self._model.T - 1) / self._model.TMax
 
         res = self._model.play(tentativoInt)
 
@@ -75,3 +93,10 @@ class Controller(object):
 
     def getTMax(self):
         return self._model.TMax
+
+    def setDifficulty(self, e):
+        self._model.NMax = int(self._view._sl.value)
+        self._model.TMax = int(log2(self._model.NMax))
+        self._view._txtOutNMax.value = self._model.NMax
+        self._view.update()
+        print(self._model.NMax, "Nmax")
