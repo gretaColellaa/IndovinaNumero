@@ -10,7 +10,7 @@ class Model(object):
     def reset(self):
         # Questo metodo resetta il gioco in qualsiasi momento
         self._segreto = random.randint(0, self._NMax)
-        self._T = self._TMax
+        self._T = self._TMax  #se ricominciamo resetta i tentativi possibili
         print(self._segreto)
 
     def play(self, guess):
@@ -25,12 +25,12 @@ class Model(object):
         # da fuori ci arriva un tentativo, confrontiamo
         # il tentatvo con il segreto
 
-        self._T -= 1
+        self._T -= 1 #decremento una vita
 
-        if guess == self._segreto:
+        if guess == self._segreto: #controllo se ho vinto
             return 0 # ho vinto!!
 
-        if self._T == 0:
+        if self._T == 0: #se le vite sono finite
             return 2 # ho perso definitivamente
 
         if guess > self._segreto:
@@ -62,7 +62,7 @@ class Model(object):
     def segreto(self):
         return self._segreto
 
-if __name__ == "__main__":
+if __name__ == "__main__": #per eseguire stand-alone, e quindi testare il codice
     m = Model()
     m.reset()
     print(m.play(80))

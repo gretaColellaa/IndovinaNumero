@@ -18,24 +18,25 @@ class View(object):
 
         self._txtIn = ft.TextField(label="Tentativo",
                                    width=200,
-                                   disabled=True)
+                                   disabled=True) #creo il tasto disabilitato, si attiva se inizio la partita
         self._btnReset = ft.ElevatedButton(text="Nuova Partita",
                                            width=200,
                                            on_click=self._controller.reset)
         self._btnPlay = ft.ElevatedButton(text="Gioca",
                                           width=200,
                                           on_click=self._controller.play,
-                                          disabled=True)
+                                          disabled=True) #creo il tasto disabilitato, si attiva se inizio la partita
 
         self._lv = ft.ListView(expand=True)
 
-        row1 = ft.Container(self._titolo, alignment=ft.alignment.center)
+        row1 = ft.Container(self._titolo, alignment=ft.alignment.center) #container del titolo
+        # NOTA DIFFERENZA NELL'ALLIGNMENT !!!
 
         row2 = ft.Row([self._txtOutNMax, self._txtOutTMax, self._txtOutT],
-                      alignment=ft.MainAxisAlignment.CENTER)
+                      alignment=ft.MainAxisAlignment.CENTER) #riga di tre elementi
 
         row3 = ft.Row([self._btnReset, self._txtIn, self._btnPlay],
-                      alignment=ft.MainAxisAlignment.CENTER)
+                      alignment=ft.MainAxisAlignment.CENTER) #riga di tre elementi
 
         self._sl = ft.Slider(label="Difficoltà",
                              min=50, max=500,
@@ -46,7 +47,7 @@ class View(object):
 
 
 
-        self._page.add(row1, row2, self._sl, row3, self._pb, self._lv)
+        self._page.add(row1, row2, self._sl, row3, self._pb, self._lv) #aggiungol elementi alla pagina
 
         self._page.update()
 

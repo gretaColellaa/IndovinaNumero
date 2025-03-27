@@ -11,10 +11,10 @@ class Controller(object):
         self._model = Model()
 
     def reset(self, e):
-        self._model.reset()
-        self._view._txtOutT.value = self._model.T
-        self._view._lv.controls.clear()
-        self._view._btnPlay.disabled = False
+        self._model.reset() #chiamo il reset anche del model
+        self._view._txtOutT.value = self._model.T #resetta i tentativi
+        self._view._lv.controls.clear() #pulisce la listview
+        self._view._btnPlay.disabled = False #riattiva il pulsante
         self._view._txtIn.disabled = False
         self._view._lv.controls.append(
             ft.Text("Indovina a quale numero sto pensando!"))
@@ -25,10 +25,10 @@ class Controller(object):
         self._view.update()
 
     def play(self, e):
-        tentativoStr = self._view._txtIn.value
-        self._view._txtIn.value = ""
+        tentativoStr = self._view._txtIn.value #il tentativo è il valore in ingresso
+        self._view._txtIn.value = "" #aggiorna il valore che si visualizza a nullo così da scrivere senza dover cancellare
 
-        if tentativoStr == "":
+        if tentativoStr == "": #se non inserisco un valore
             self._view._lv.controls.append(
                 ft.Text("Attenzione! inserisci un valore numerico da testare.",
                         color="red"))
